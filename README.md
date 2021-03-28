@@ -1,6 +1,6 @@
 # Simple GraphQL client
 
-[![Run unit tests](https://github.com/lukaszraczylo/simple-gql-client/actions/workflows/test.yaml/badge.svg)](https://github.com/lukaszraczylo/simple-gql-client/actions/workflows/test.yaml) [![codecov](https://codecov.io/gh/lukaszraczylo/simple-gql-client/branch/master/graph/badge.svg?token=GS3IPOIWDH)](https://codecov.io/gh/lukaszraczylo/simple-gql-client)
+[![Run unit tests](https://github.com/lukaszraczylo/simple-gql-client/actions/workflows/test.yaml/badge.svg)](https://github.com/lukaszraczylo/simple-gql-client/actions/workflows/test.yaml) [![Maintainability](https://api.codeclimate.com/v1/badges/e53b85495bac3e7bb974/maintainability)](https://codeclimate.com/github/lukaszraczylo/simple-gql-client/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/e53b85495bac3e7bb974/test_coverage)](https://codeclimate.com/github/lukaszraczylo/simple-gql-client/test_coverage)
 
 It's Hasura friendly.
 

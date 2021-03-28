@@ -39,12 +39,13 @@ jobs:
           args: |
             make prepare;
             make test CI_RUN=${CI}
-      - name: Codecov integration
-        continue-on-error: true
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage.txt
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: {{ secrets.CODECLIMATE_TOKEN }}
+        with: # cover.out
+          coverageLocations: |
+            coverage.txt:gocov
 
   release:
     name: Create Release
