@@ -10,6 +10,7 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
+// GraphQLUrl allows you to set the graphql endpoint
 var GraphQLUrl = "http://127.0.0.1:9090/v1/graphql"
 
 type requestBase struct {
@@ -17,6 +18,7 @@ type requestBase struct {
 	Variables interface{} `json:"variables"`
 }
 
+// queryBuilder function takes query and variables as parameters and converts them into the JSON object.
 func queryBuilder(data string, variables interface{}) ([]byte, error) {
 	var err error
 	var qb = &requestBase{
@@ -34,6 +36,9 @@ func queryBuilder(data string, variables interface{}) ([]byte, error) {
 	return j.Bytes(), err
 }
 
+// Query function takes query, variables and list of headers as parameters.
+// It then builds the query and executes it to the specified graphql endpoint.
+// Function returns graphql server returns and potential errors.
 func Query(query string, variables interface{}, headers map[string]interface{}) (string, error) {
 	var err error
 	readyQuery, err := queryBuilder(query, variables)
