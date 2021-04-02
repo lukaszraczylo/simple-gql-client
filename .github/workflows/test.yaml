@@ -40,12 +40,12 @@ jobs:
           args: |
             make prepare;
             make test CI_RUN=${CI}
-      - name: Codecov integration
-        continue-on-error: true
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage.txt
+      # - name: Codecov integration
+      #   continue-on-error: true
+      #   uses: codecov/codecov-action@v1
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     files: coverage.txt
 
   release:
     name: Create Release
