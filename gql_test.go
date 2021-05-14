@@ -72,6 +72,7 @@ func (suite *TestSuite) Test_queryBuilder() {
 }
 
 func (suite *TestSuite) Test_queryAgainstDatabaseExecution() {
+	os.Unsetenv("GRAPHQL_ENDPOINT")
 	jsonResponse := `{
 		"data": {"tbl_user_group_admins":[{"id":109,"is_admin":true}]}
 	}`
