@@ -78,9 +78,6 @@ func (suite *TestSuite) Test_queryAgainstDatabaseExecution() {
 	}`
 	server := mockGraphQLServerResponses(jsonResponse)
 	defer server.Close()
-
-	fmt.Println(GraphQLUrl)
-
 	headers := map[string]interface{}{
 		"x-hasura-user-id":   37,
 		"x-hasura-user-uuid": "bde3262e-b42e-4151-ac10-d43fb38f44a5",
@@ -96,7 +93,6 @@ func (suite *TestSuite) Test_queryAgainstDatabaseExecution() {
 			is_admin
 		}
 	}`
-	GraphQLUrl = "http://hasura.local/v1/graphql"
 	result, err := Query(query, variables, headers)
 	fmt.Println(GraphQLUrl)
 	if err != nil {
