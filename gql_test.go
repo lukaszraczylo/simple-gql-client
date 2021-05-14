@@ -94,7 +94,6 @@ func (suite *TestSuite) Test_queryAgainstDatabaseExecution() {
 		}
 	}`
 	result, err := Query(query, variables, headers)
-	fmt.Println(GraphQLUrl)
 	if err != nil {
 		suite.T().Log("Query execution errored. Is GQL server up?")
 	}
