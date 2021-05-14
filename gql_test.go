@@ -95,6 +95,7 @@ func (suite *TestSuite) Test_queryAgainstDatabaseExecution() {
 			is_admin
 		}
 	}`
+	GraphQLUrl = "http://hasura.local/v1/graphql"
 	result, err := Query(query, variables, headers)
 	fmt.Println(GraphQLUrl)
 	if err != nil {
@@ -126,24 +127,36 @@ func ExampleQuery() {
 
 func Test_initialize(t *testing.T) {
 	tests := []struct {
-		name         string
-		expected     string
-		env_endpoint string
+		name           string
+		expected       string
+		env_endpoint   string
+		local_endpoint string
 	}{
 		{
-			name:         "Setting env variable for endpoint",
-			env_endpoint: "hasura.local/v1/graphql",
-			expected:     "hasura.local/v1/graphql",
+			name:         "Setting env variable for endpoint (ENV)",
+			env_endpoint: "new-hasura.local/v1/graphql",
+			expected:     "new-hasura.local/v1/graphql",
 		},
 		{
-			name:         "Setting default endpoint",
-			env_endpoint: "",
-			expected:     "http://127.0.0.1:9090/v1/graphql",
+			name:           "Setting default endpoint (ENV)",
+			env_endpoint:   "",
+			local_endpoint: "",
+			expected:       "http://127.0.0.1:9090/v1/graphql",
 		},
 		{
-			name:         "Setting custom endpoint",
+			name:         "Setting custom endpoint (ENV)",
 			env_endpoint: "http://127.0.0.1:8080/v1/graphql",
 			expected:     "http://127.0.0.1:8080/v1/graphql",
+		},
+		{
+			name:           "Setting custom endpoint (VAR)",
+			local_endpoint: "http://127.0.0.1:8080/v1/graphql",
+			expected:       "http://127.0.0.1:8080/v1/graphql",
+		},
+		{
+			name:           "Setting custom endpoint (VAR)",
+			local_endpoint: "hasura-def.local/v1/graphql",
+			expected:       "hasura-def.local/v1/graphql",
 		},
 	}
 	assert := assert.New(t)
@@ -154,8 +167,12 @@ func Test_initialize(t *testing.T) {
 			GraphQLUrl = ""
 			if tt.env_endpoint != "" {
 				os.Setenv("GRAPHQL_ENDPOINT", tt.env_endpoint)
+				t.Log(tt.env_endpoint, os.Getenv("GRAPHQL_ENDPOINT"))
 			}
-			t.Log(tt.env_endpoint, os.Getenv("GRAPHQL_ENDPOINT"))
+			if tt.local_endpoint != "" {
+				os.Unsetenv("GRAPHQL_ENDPOINT")
+				GraphQLUrl = tt.local_endpoint
+			}
 			prepare()
 			assert.Equal(tt.expected, GraphQLUrl, "Unexpected value of env variable: "+tt.name)
 		})
