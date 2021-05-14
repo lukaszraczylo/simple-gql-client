@@ -125,7 +125,7 @@ func ExampleQuery() {
 	fmt.Println(result)
 }
 
-func Test_initialize(t *testing.T) {
+func (suite *TestSuite) Test_initialize() {
 	tests := []struct {
 		name           string
 		expected       string
@@ -159,10 +159,9 @@ func Test_initialize(t *testing.T) {
 			expected:       "hasura-def.local/v1/graphql",
 		},
 	}
-	assert := assert.New(t)
 	backupEnv, present := os.LookupEnv("GRAPHQL_ENDPOINT")
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		suite.T().Run(tt.name, func(t *testing.T) {
 			os.Unsetenv("GRAPHQL_ENDPOINT")
 			GraphQLUrl = ""
 			if tt.env_endpoint != "" {
@@ -174,7 +173,7 @@ func Test_initialize(t *testing.T) {
 				GraphQLUrl = tt.local_endpoint
 			}
 			prepare()
-			assert.Equal(tt.expected, GraphQLUrl, "Unexpected value of env variable: "+tt.name)
+			assert.Equal(suite.T(), tt.expected, GraphQLUrl, "Unexpected value of env variable: "+tt.name)
 		})
 	}
 	if present {
