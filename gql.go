@@ -30,7 +30,9 @@ func prepare() {
 	if present {
 		GraphQLUrl = value
 	} else {
-		GraphQLUrl = "http://127.0.0.1:9090/v1/graphql"
+		if GraphQLUrl == "" {
+			GraphQLUrl = "http://127.0.0.1:9090/v1/graphql"
+		}
 	}
 }
 
