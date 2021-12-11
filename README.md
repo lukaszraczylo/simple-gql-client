@@ -4,7 +4,12 @@
 
 Ps. It's Hasura friendly.
 
+## Project updated and moved
+
+This repository has been replaced by new, faster and better [go-simple-graphql](https://github.com/lukaszraczylo/go-simple-graphql).
+
 - [Simple GraphQL client](#simple-graphql-client)
+  - [Project updated and moved](#project-updated-and-moved)
   - [Reasoning](#reasoning)
   - [Features](#features)
   - [Usage example](#usage-example)
